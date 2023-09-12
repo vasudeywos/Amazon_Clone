@@ -5,6 +5,7 @@ import (
     "mymod/utils"
     "github.com/gin-gonic/gin"
     "net/http"
+    _"log"
 )
 
 func JwtAuthMiddleware() gin.HandlerFunc {
