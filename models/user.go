@@ -16,7 +16,9 @@ type User struct {
     Username string `gorm:"size:255" json:"username" binding:"required"`
     Password string `gorm:"size:255" json:"password" binding:"required"`
     IsStaff  bool   `json:"is_staff"`
-    Products []Product
+    Products []Product //Many to One
+    CartID uint
+    Orders []Order //Has Many;Many to One
 }
 
 func (user *User) HashPassword() error {

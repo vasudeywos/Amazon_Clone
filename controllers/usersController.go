@@ -5,6 +5,7 @@ import (
 	"mymod/utils"
 	"net/http"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -23,10 +24,11 @@ type LoginInput struct {
 
 type Server struct {
     db *gorm.DB
+    store sessions.Store
 }
 
-func NewServer(db *gorm.DB) *Server {
-    return &Server{db: db}
+func NewServer(db *gorm.DB,store sessions.Store) *Server {
+    return &Server{db: db,store: store}
 }
 
 func (s *Server) Register(c *gin.Context) {

@@ -7,5 +7,7 @@ type Product struct {
 	Name string `json:"name" binding:"required"`
 	Price string `json:"price" binding:"required"`
 	Quantity int `json:"quantity" binding:"required"`
-	UserId uint
+	Category string `json:"category"`
+	UserID    uint //One to Many
+	OrderItems  []OrderItems  //Many to One
 }

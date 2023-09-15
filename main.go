@@ -11,6 +11,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
+	"github.com/gin-contrib/sessions"
+	gormsessions "github.com/gin-contrib/sessions/gorm"
 )
 func init(){        //Runs before main
 	initializers.LoadEnvVariables()
@@ -24,6 +26,7 @@ func DbInit() *gorm.DB {
     return db
 }
 func main(){
+
 	router:=gin.Default()
 
 	db:=DbInit()
@@ -34,7 +37,9 @@ func main(){
 		})
 	})
 
-	server:=controllers.NewServer(db)
+	store := gormsessions.NewStore(db, true, []byte("secret"))
+
+	server:=controllers.NewServer(db,store)
 
 	//API
 	router.POST("/register",server.Register)
@@ -46,9 +51,17 @@ func main(){
 
 	logged:=router.Group("/loggedin")
 
-	logged.Use(middlewares.JwtAuthMiddleware())
-    logged.GET("/getprod", server.GetProd)
+	logged.Use(middlewares.JwtAuthMiddleware(),sessions.Sessions("moisessions",store))
+    logged.GET("/getprod", server.GetAllProd)
+	logged.GET("/searchprodname", server.FindProd)
+	logged.GET("/filtcateg", server.FilterCatg)
     logged.POST("/sellprod", server.SellProd)
+	logged.GET("/sellerprodlist", server.SellerProd)
+	logged.POST("/updateprod",server.UpdateProd)
+	logged.POST("/deleteprod",server.DeleteProd)
+	logged.POST("/addtocart", server.AddToCart)
+	logged.GET("/getcart", server.GetCart)
+	logged.POST("/orderplace",server.PlaceOrder)
 
     //port := os.Getenv("PORT")
 	router.Run("localhost:8080")

@@ -37,6 +37,12 @@ func Setup() (*gorm.DB, error) {
     if err = db.AutoMigrate(&Product{}); err != nil {
         log.Println(err)
     }
+    if err = db.AutoMigrate(&OrderItems{}); err != nil {
+        log.Println(err)
+    }
+    if err = db.AutoMigrate(&Order{}); err != nil {
+        log.Println(err)
+    }
     return db, nil
 }
 

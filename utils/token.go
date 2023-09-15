@@ -3,11 +3,10 @@ package utils
 import (
 	"errors"
 	"fmt"
-	"mymod/models"
 	"os"
 	"strings"
 	"time"
-
+    "mymod/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 )
@@ -50,7 +49,7 @@ func GetToken(c *gin.Context) (*jwt.Token, error) {
 }
 
 
-func ValidateToken (c *gin.Context) error {
+func ValidateToken(c *gin.Context) error {
     token, err := GetToken(c)
 
     if err != nil {
