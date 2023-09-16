@@ -10,10 +10,10 @@ import (
 
 func Setup() (*gorm.DB, error) {
 
-    // Define the database
+   //Database retriev
     dbPath := filepath.Join("D:/Amazn/", "database.db")
 
-    // Check if the database file exists, and if not, create it
+    //If not create
     if _, err := os.Stat(dbPath); os.IsNotExist(err) {
         log.Println("Creating the file")
         file, err := os.Create(dbPath)
@@ -24,7 +24,7 @@ func Setup() (*gorm.DB, error) {
     }
 
 
-    // AutoMigrate your database tables
+    //AutoMigrate
     db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 
     if err != nil {
