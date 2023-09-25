@@ -1,6 +1,6 @@
 module mymod
 
-go 1.21.0
+go 1.23
 
 require (
 	github.com/gin-contrib/sessions v0.0.5
