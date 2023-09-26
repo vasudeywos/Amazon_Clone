@@ -2,7 +2,7 @@ package models
 
 import (
     "os"
-    "path/filepath"
+    _"path/filepath"
     "gorm.io/driver/sqlite"
     "gorm.io/gorm"
     "log"
