@@ -11,7 +11,7 @@ import (
 func Setup() (*gorm.DB, error) {
 
    //Database retriev
-    dbPath := filepath.Join("D:/Amazn/", "database.db")
+    dbPath := filepath.Join("/home/azureuser/Amazn/database.db", "database.db")
 
     //If not create
     if _, err := os.Stat(dbPath); os.IsNotExist(err) {
