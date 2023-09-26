@@ -18,26 +18,26 @@ func init(){        //Runs before main
 	initializers.LoadEnvVariables()
 }
 
-func DbInit() (*gorm.DB, error) {
+func DbInit() *gorm.DB {
     db, err := models.Setup()
     if err != nil {
-        log.Printf("Error setting up database: %v\n", err)
-        return nil, err
+        log.Println("Problem setting up database")
     }
-    return db, nil
+    return db
 }
-
 func main(){
 
 	router:=gin.Default()
 
-	db, err := DbInit()
-    if err != nil {
-        log.Fatalf("Error initializing database: %v\n", err)
-    }
-    log.Printf("Value of db: %v\n", db)
+	db:=DbInit()
 
-    store := gormsessions.NewStore(db, true, []byte("secret"))
+	router.GET("/ping",func(c *gin.Context){
+		c.JSON(http.StatusOK,gin.H{
+			"body":"This is it",
+		})
+	})
+
+	store := gormsessions.NewStore(db, true, []byte("secret"))
 
 	server:=controllers.NewServer(db,store)
 
