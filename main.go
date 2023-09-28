@@ -49,6 +49,8 @@ func main(){
         log.Println("Error loading .env file")
     }
 
+	router.MaxMultipartMemory = 8 << 20  // 8 MiB limit
+
 	logged:=router.Group("/loggedin")
 
 	logged.Use(middlewares.JwtAuthMiddleware(),sessions.Sessions("moisessions",store))
@@ -62,6 +64,9 @@ func main(){
 	logged.POST("/addtocart", server.AddToCart)
 	logged.GET("/getcart", server.GetCart)
 	logged.POST("/orderplace",server.PlaceOrder)
+	logged.POST("/uploadimage",controllers.FileUpload)
+	logged.Static("/uploaded-images", "assets/images")
+
 
     //port := os.Getenv("PORT")
 	//router.Run("localhost:8080")
