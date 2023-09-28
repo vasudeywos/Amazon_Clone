@@ -65,7 +65,7 @@ func main(){
 	logged.GET("/getcart", server.GetCart)
 	logged.POST("/orderplace",server.PlaceOrder)
 	logged.POST("/uploadimage",controllers.FileUpload)
-	logged.Static("/uploaded-images", "assets/images")
+	logged.Static("/viewiamge", "assets/images")
 
 
     //port := os.Getenv("PORT")
