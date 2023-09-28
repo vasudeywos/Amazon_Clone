@@ -65,7 +65,15 @@ func main(){
 
     //port := os.Getenv("PORT")
 	//router.Run("localhost:8080")
-	router.Run(":80")
+	//router.Run(":80")
+	
+    certPath := "mycert.crt"
+    keyPath := "mycert.key"
 
-
+    // Run the server with HTTPS
+    err := http.ListenAndServeTLS(":443", certPath, keyPath, router)
+    if err != nil {
+        panic(err)
+    
+	}
 }
