@@ -11,7 +11,6 @@ var dst ="assets"
 func FileUpload(c *gin.Context) {
 	user,_:=utils.CurrentUser(c)
 	if !user.IsStaff {
-		// Only staff members upload
 		c.JSON(http.StatusForbidden, gin.H{"error": "Permission denied"})
 		return
 		}
