@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-var dst ="assets/images"
+var dst ="assets"
 
 func FileUpload(c *gin.Context) {
 	user,_:=utils.CurrentUser(c)
@@ -25,7 +25,7 @@ func FileUpload(c *gin.Context) {
 	}
 
 	for _,file:= range files{
-		err:=c.SaveUploadedFile(file, dst+file.Filename)
+		err:=c.SaveUploadedFile(file, dst+"/"+file.Filename)
 		if err !=nil{
 			c.JSON(http.StatusInternalServerError,gin.H{"error":err.Error()})
 			return
