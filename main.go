@@ -72,8 +72,8 @@ func main(){
 	//router.Run("localhost:8080")
 	//router.Run(":80")
 	
-    certPath := "mycert.crt"
-    keyPath := "mycert.key"
+    certPath := "server.crt"
+    keyPath := "server.key"
 
     // Run the server with HTTPS
     err := http.ListenAndServeTLS(":443", certPath, keyPath, router)
